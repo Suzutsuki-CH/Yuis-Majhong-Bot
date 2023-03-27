@@ -5,14 +5,22 @@ intents.message_content = True
 
 client = discord.Client(intents=intents)
 
-
+@client.event
 async def on_ready():
     print(f'{client.user} has connected to Discord!')
 
-
+@client.event
 async def on_message(message):
-    if message.author == client.user:
-        return 0
+    if message.author != client.user:
+        print(message.content)
+    
+        if 'oppai' in message.content:
+            print("sent")
+            await message.channel.send('BOOBs')
+
+        if message.content.startswith('yui'):
+            print("sent")
+            await message.channel.send('<:lilyO:1009861944150343770>')
     
     # your code to process the message goes here
 
