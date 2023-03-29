@@ -9,7 +9,7 @@ import os
 # Convert user input to tenhou format
 def TenhouGenerate(s):
     S = np.array(list(s))
-    sig_index = [0]+[i for i in range(len(S)) if ord(S[i]) in [115, 112, 109, 122]]
+    sig_index = [-1]+[i for i in range(len(S)) if ord(S[i]) in [115, 112, 109, 122]]
 
     # [man, sou, pin, honor]
     TenhouArr = [[],[],[],[]]
@@ -46,7 +46,9 @@ def TenhouGenerate(s):
     zi = "".join(zi)
 
     return [man, sou, pin, zi]
-        
+
+
+# Generate image using XeLaTeX
 def LaTeX_Generate(s):
     with open('LaTeX/Mahjong.tex','w') as file:
             file.write(r'\documentclass{standalone}'+'\n')
@@ -59,9 +61,10 @@ def LaTeX_Generate(s):
             file.write(r'\end{tikzpicture}'+'\n')
             file.write(r'\end{document}')
 
-    os.system('"/Users/suzutsuki-ch/bin/xelatex" -interaction=nonstopmode LaTeX/Mahjong.tex')
-    os.system('convert -density 300 Mahjong.pdf -quality 110 LaTeX/Tiles/temp.png')
-    
+    os.system('"/Users/suzutsuki-ch/bin/xelatex" -interaction=nonstopmode LaTeX/Mahjong.tex;')
+    os.system('convert -density 300 Mahjong.pdf -quality 110 LaTeX/Tiles/temp.png;')
+
+# Clean up the auxillary file from latex generation.
 def CleanUp():
     os.remove('LaTeX/Tiles/temp.png')
     os.remove('Mahjong.pdf')
