@@ -48,7 +48,7 @@ async def on_message(message):
         # React to any message with 'oppai'
         if 'oppai' in message.content and not sent:
             print("sent")
-            await message.channel.send('BOOBs')
+            await message.channel.send('Oppai Kinshi!!')
             sent = True
 
         # React to any message with 'yui'
